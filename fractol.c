@@ -6,13 +6,13 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 11:09:48 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/06 22:33:55 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/08 19:59:16 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-float to_onther_rang(float x, float n_rang[2], float o_rang[2])
+double to_onther_rang(double x, double n_rang[2], double o_rang[2])
 {
 	return ((x - o_rang[0]) * (n_rang[1] - n_rang[0]) / (o_rang[1] - o_rang[0]) + n_rang[0]);
 }
@@ -27,7 +27,7 @@ void	my_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)(img->p_pixel + pos) = color;
 }
 
-t_data	*start(char *name)
+t_data	*start(char *name, char **av)
 {
 	t_data *data;
 
@@ -47,11 +47,12 @@ t_data	*start(char *name)
 										 &data->img.len, &data->img.endian);
 	if (!data->img.p_pixel)
 		exit(1);
-	data->map = 4;
+	data->p = 4;
 	data->s.x = 0;
 	data->s.y = 0;
 	data->max_itra = 42;
 	data->z = 1;
+	data->av = av;
 	return (data);
 }
 
@@ -83,20 +84,20 @@ void	part_render(int x, int y, t_data *data)
 	z.r = 0;
 	z.i = 0;
 	i = 0;
-	c.r = (to_onther_rang(x, (float []){-2, 2}, (float []){0, WIDTH}) + data->s.x) * data->z;
-	c.i = (to_onther_rang(y, (float []){2, -2}, (float []){0, HEIGHT}) + data->s.y) * data->z;
+	c.r = (to_onther_rang(x, (double []){-2, 2}, (double []){0, WIDTH}) + data->s.x) * data->z;
+	c.i = (to_onther_rang(y, (double []){2, -2}, (double []){0, HEIGHT}) + data->s.y) * data->z;
 	while (i < data->max_itra)
 	{
 		z = small_equa(z, c);
-		if ((pow(z.r, 2) + pow(z.i, 2)) > data->map)
+		if ((pow(z.r, 2) + pow(z.i, 2)) > data->p)
 		{
-			color = to_onther_rang(i, (float []){BLACK, WHITE}, (float []){0, data->max_itra});
+			color = to_onther_rang(i, (double []){BLACK, RED}, (double []){0, data->max_itra});
 			my_pixel_put(&data->img, x, y, color);
 			return ;
 		}
 		i++;
 	}
-	my_pixel_put(&data->img, x, y, WHITE);
+	my_pixel_put(&data->img, x, y,  BLACK);
 }
 
 void	my_draw(t_data *data)
@@ -110,7 +111,10 @@ void	my_draw(t_data *data)
 		j = 0;
 		while (j < HEIGHT)
 		{
-			part_render(i, j, data);
+			if (data->v == 1)
+				part_render(i, j, data);
+			else
+				my_julai(i, j, data);
 			j++;
 		}
 		i++;
@@ -142,9 +146,9 @@ int mouse(int k, int x, int y, t_data *data)
 	(void)x;
 	(void)y;
 	if (k == 4)
-		data->z += 0.2;
+		data->z *= 1.5;
 	else if (k == 5)
-		data->z -= 0.2;
+		data->z /= 1.5;
 	my_draw(data);
 	return 0;
 }
@@ -153,14 +157,18 @@ int main(int ac, char **av)
 {
 	t_data *data;
 
-	if (ac != 2)
-		(perror("arg error "), exit(1));
-	if (!ft_strcmp(av[1], "mandelbrot"))
+	if (ac == 2 && !ft_strcmp(av[1], "mandelbrot"))
 	{
-		data = start("mandelbrot");
+		data = start("mandelbrot", av);
+		data->v = 1;
+	}
+	else if (ac == 4 && !ft_strcmp(av[1], "julia"))
+	{
+		data = start("julia", av);
+		data->v = 2;
 	}
 	else
-		data = start("diha fkark ....");
+		exit(1);
 	my_draw(data);
 	mlx_key_hook(data->mlx_win, keyb, data);
 	mlx_mouse_hook(data->mlx_win, mouse, data);

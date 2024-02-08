@@ -6,7 +6,7 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 11:10:17 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/06 22:16:50 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/08 19:55:35 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@
 # include <mlx.h>
 # include <stdlib.h>
 
-#define WIDTH 900
-#define HEIGHT 900
-
-
+#define WIDTH 600
+#define HEIGHT 600
 
 #define BLACK 0x000000
 #define WHITE 0xFFFFFF
@@ -39,8 +37,8 @@
 
 typedef struct s_nb_cmp
 {
-	float	r;
-	float	i;
+	double	r;
+	double	i;
 }	t_nb_cmp;
 
 typedef struct s_img
@@ -54,8 +52,8 @@ typedef struct s_img
 
 typedef struct s_shift
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 }	t_shift;
 
 typedef struct s_data
@@ -63,13 +61,24 @@ typedef struct s_data
 	void	*mlx;		// mlx_init();
 	void	*mlx_win;	//mlx_new_window()
 	t_img	img;		//malx_new_image()
-	int		map;
 	t_shift	s;
-	float	z;
+	int		p;
+	double	z;
+	int		v;
+	char	**av;
 	int max_itra;
 }	t_data;
 
-int	ft_strcmp(char *s1,char *s2);
+int			ft_strcmp(char *s1,char *s2);
 
+double		to_onther_rang(double x, double n_rang[2], double o_rang[2]);
+void		my_pixel_put(t_img *img, int x, int y, int color);
+t_data		*start(char *name, char **av);
+t_nb_cmp	squar_cmp(t_nb_cmp nb);
+t_nb_cmp 	small_equa(t_nb_cmp z, t_nb_cmp c);
+void		part_render(int x, int y, t_data *data);
+void		my_draw(t_data *data);
+double		to_double(char *str);
+void		my_julai(int x, int y, t_data *data);
 
 #endif

@@ -6,15 +6,15 @@
 #    By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/03 11:20:23 by meserghi          #+#    #+#              #
-#    Updated: 2024/02/05 12:01:00 by meserghi         ###   ########.fr        #
+#    Updated: 2024/02/08 19:54:56 by meserghi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FILES= fractol.c utils/ft_strcmp.c
+FILES= fractol.c utils/ft_strcmp.c utils/to_double.c julia.c
 
 OBJ = ${FILES:.c=.o}
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -O3
 F_MLX = -lmlx -framework OpenGL -framework AppKit
 NAME = fractol
 
