@@ -6,7 +6,7 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 11:09:48 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/08 19:59:16 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/09 11:18:51 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,12 +143,11 @@ int	keyb(int k, t_data *data)
 
 int mouse(int k, int x, int y, t_data *data)
 {
-	(void)x;
-	(void)y;
 	if (k == 4)
 		data->z *= 1.5;
 	else if (k == 5)
 		data->z /= 1.5;
+	printf("(%d, %d)\n", x, y);
 	my_draw(data);
 	return 0;
 }
