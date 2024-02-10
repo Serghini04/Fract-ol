@@ -52,9 +52,9 @@ t_data	*start(char *name, char **av)
 	data->max_itra = 42;
 	data->z = 1;
 	data->dir.x_n = -2;
-	data->dir.x_p =  2;
-	data->dir.y_n =  -2;
-	data->dir.y_p =  2;
+	data->dir.x_p = 2;
+	data->dir.y_n = -2;
+	data->dir.y_p = 2;
 	data->av = av;
 	return (data);
 }
@@ -147,25 +147,25 @@ int	keyb(int k, t_data *data)
 int mouse(int k, int x, int y, t_data *data)
 {
 	double map_x = to_onther_rang(x, data->dir.x_n, data->dir.x_p, WIDTH);
-	double map_y = to_onther_rang(y, data->dir.y_p, data->dir.y_n, HEIGHT);
+	double map_y = to_onther_rang(y, data->dir.y_n, data->dir.y_p, HEIGHT);
 	if (k == 4)
 	{
 		data->z *= 1.05;
-		data->dir.x_p = map_x + data->z * (data->dir.x_p - map_x);
-		data->dir.x_n = map_x + data->z * (data->dir.x_n - map_x);
-		data->dir.y_p = map_y + data->z * (data->dir.x_p - map_y);
-		data->dir.y_n = map_y + data->z * (data->dir.x_n - map_y);
+		data->dir.x_p = map_x +(data->dir.x_p - map_x) * 1.05;
+		data->dir.x_n = map_x +(data->dir.x_n - map_x) * 1.05;
+		data->dir.y_p = map_y +(data->dir.x_p - map_y) * 1.05;
+		data->dir.y_n = map_y +(data->dir.x_n - map_y) * 1.05;
 	}
 	else if (k == 5)
 	{
-		data->z *= 0.95;
-		data->dir.x_p = map_x + data->z * (data->dir.x_p - map_x);
-		data->dir.x_n = map_x + data->z * (data->dir.x_n - map_x);
-		data->dir.y_p = map_y + data->z * (data->dir.x_p - map_y);
-		data->dir.y_n = map_y + data->z * (data->dir.x_n - map_y);
+		data->z /= 1.5;
+		data->dir.x_p = map_x + (data->dir.x_p - map_x) / 1.5;
+		data->dir.x_n = map_x + (data->dir.x_n - map_x) / 1.5;
+		data->dir.y_p = map_y + (data->dir.x_p - map_y) / 1.5;
+		data->dir.y_n = map_y + (data->dir.x_n - map_y) / 1.5;
 	}
 	else
-		exit(1);
+		return 0;
 	my_draw(data);
 	return 0;
 }

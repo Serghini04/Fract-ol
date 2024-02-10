@@ -15,7 +15,7 @@ FILES= fractol.c utils/ft_strcmp.c utils/to_double.c julia.c
 OBJ = ${FILES:.c=.o}
 
 FLAGS = -Wall -Wextra -Werror -O3
-F_MLX = -lmlx -framework OpenGL -framework AppKit
+F_MLX = -Lminilibx-linux -lmlx -L/usr/lib -lXext -lX11 -lm  -O3
 NAME = fractol
 
 all : ${NAME}
