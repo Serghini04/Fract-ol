@@ -6,17 +6,16 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 11:09:48 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/09 11:18:51 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/10 10:50:30 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-double to_onther_rang(double x, double n_rang[2], double o_rang[2])
+double to_onther_rang(double x, double n_rang0, double n_rang1, double o_rang)
 {
-	return ((x - o_rang[0]) * (n_rang[1] - n_rang[0]) / (o_rang[1] - o_rang[0]) + n_rang[0]);
+	return ((x - n_rang0) * (n_rang1 - n_rang0) / o_rang + n_rang0);
 }
-
 void	my_pixel_put(t_img *img, int x, int y, int color)
 {
 	int pos;
@@ -52,6 +51,10 @@ t_data	*start(char *name, char **av)
 	data->s.y = 0;
 	data->max_itra = 42;
 	data->z = 1;
+	data->dir.x_n = -2;
+	data->dir.x_p =  2;
+	data->dir.y_n =  -2;
+	data->dir.y_p =  2;
 	data->av = av;
 	return (data);
 }
@@ -84,14 +87,14 @@ void	part_render(int x, int y, t_data *data)
 	z.r = 0;
 	z.i = 0;
 	i = 0;
-	c.r = (to_onther_rang(x, (double []){-2, 2}, (double []){0, WIDTH}) + data->s.x) * data->z;
-	c.i = (to_onther_rang(y, (double []){2, -2}, (double []){0, HEIGHT}) + data->s.y) * data->z;
+	c.r = (to_onther_rang(x, data->dir.x_n, data->dir.x_p, WIDTH) + data->s.x);
+	c.i = (to_onther_rang(y, data->dir.y_p, data->dir.y_n, HEIGHT) + data->s.y);
 	while (i < data->max_itra)
 	{
 		z = small_equa(z, c);
 		if ((pow(z.r, 2) + pow(z.i, 2)) > data->p)
 		{
-			color = to_onther_rang(i, (double []){BLACK, RED}, (double []){0, data->max_itra});
+			color = to_onther_rang(i, BLACK, RED, data->max_itra);
 			my_pixel_put(&data->img, x, y, color);
 			return ;
 		}
@@ -143,11 +146,26 @@ int	keyb(int k, t_data *data)
 
 int mouse(int k, int x, int y, t_data *data)
 {
+	double map_x = to_onther_rang(x, data->dir.x_n, data->dir.x_p, WIDTH);
+	double map_y = to_onther_rang(y, data->dir.y_p, data->dir.y_n, HEIGHT);
 	if (k == 4)
-		data->z *= 1.5;
+	{
+		data->z *= 1.05;
+		data->dir.x_p = map_x + data->z * (data->dir.x_p - map_x);
+		data->dir.x_n = map_x + data->z * (data->dir.x_n - map_x);
+		data->dir.y_p = map_y + data->z * (data->dir.x_p - map_y);
+		data->dir.y_n = map_y + data->z * (data->dir.x_n - map_y);
+	}
 	else if (k == 5)
-		data->z /= 1.5;
-	printf("(%d, %d)\n", x, y);
+	{
+		data->z *= 0.95;
+		data->dir.x_p = map_x + data->z * (data->dir.x_p - map_x);
+		data->dir.x_n = map_x + data->z * (data->dir.x_n - map_x);
+		data->dir.y_p = map_y + data->z * (data->dir.x_p - map_y);
+		data->dir.y_n = map_y + data->z * (data->dir.x_n - map_y);
+	}
+	else
+		exit(1);
 	my_draw(data);
 	return 0;
 }

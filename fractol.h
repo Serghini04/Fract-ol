@@ -6,7 +6,7 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 11:10:17 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/08 19:55:35 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/09 21:26:14 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <mlx.h>
 # include <stdlib.h>
 
-#define WIDTH 600
-#define HEIGHT 600
+#define WIDTH 900
+#define HEIGHT 900
 
 #define BLACK 0x000000
 #define WHITE 0xFFFFFF
@@ -56,22 +56,31 @@ typedef struct s_shift
 	double	y;
 }	t_shift;
 
+typedef struct	s_direction
+{
+	double	x_p;
+	double	x_n;
+	double	y_p;
+	double	y_n;
+}	t_direction;
+
 typedef struct s_data
 {
-	void	*mlx;		// mlx_init();
-	void	*mlx_win;	//mlx_new_window()
-	t_img	img;		//malx_new_image()
-	t_shift	s;
-	int		p;
-	double	z;
-	int		v;
-	char	**av;
-	int max_itra;
+	void		*mlx;		// mlx_init();
+	void		*mlx_win;	//mlx_new_window()
+	t_img		img;		//malx_new_image()
+	t_shift		s;
+	t_direction	dir;
+	int			p;
+	double		z;
+	int			v;
+	char		**av;
+	int			max_itra;
 }	t_data;
 
 int			ft_strcmp(char *s1,char *s2);
 
-double		to_onther_rang(double x, double n_rang[2], double o_rang[2]);
+double		to_onther_rang(double x, double n_rang0, double n_rang1, double o_rang);
 void		my_pixel_put(t_img *img, int x, int y, int color);
 t_data		*start(char *name, char **av);
 t_nb_cmp	squar_cmp(t_nb_cmp nb);
