@@ -6,7 +6,7 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:34:42 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/11 22:16:51 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/11 22:44:39 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	my_julai(int x, int y, t_data *data)
 	c.r = to_double(data->av[2]);
 	c.i = to_double(data->av[3]);
 	i = 0;
-	z.r = (to_onther_rang(x, data->dir.x_n, data->dir.x_p, WIDTH) + data->s.x) * data->z;
-	z.i = (to_onther_rang(y, data->dir.y_p, data->dir.y_n, HEIGHT) + data->s.y) * data->z;
+	z.r = (to_onther_rang(x, data->dir.x_n, data->dir.x_p, WIDTH) + data->s.x);
+	z.i = (to_onther_rang(y, data->dir.y_p, data->dir.y_n, HEIGHT) + data->s.y);
 	while (i < data->max_itra)
 	{
 		z = small_equa(z, c);
