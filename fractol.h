@@ -6,7 +6,7 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 11:10:17 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/10 15:05:16 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/11 22:16:46 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
-# include "minilibx-linux/mlx.h"
+# include <mlx.h>
 # include <stdlib.h>
 
 #define WIDTH 900

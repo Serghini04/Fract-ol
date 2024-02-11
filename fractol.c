@@ -6,7 +6,7 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 11:09:48 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/11 11:24:04 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/11 22:33:08 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 double to_onther_rang(double x, double n_rang0, double n_rang1, double o_rang)
 {
-	return ((x - n_rang0) * (n_rang1 - n_rang0) / o_rang + n_rang0);
+	return ((n_rang1 - n_rang0) * (x) / (o_rang) + n_rang0);
 }
 void	my_pixel_put(t_img *img, int x, int y, int color)
 {
@@ -147,17 +147,23 @@ int	keyb(int k, t_data *data)
 int mouse(int k, int x, int y, t_data *data)
 {
 	double map_x = to_onther_rang(x, data->dir.x_n, data->dir.x_p, WIDTH);
-	double map_y = to_onther_rang(y, data->dir.y_n, data->dir.y_p, HEIGHT);
+	double map_y = to_onther_rang(y, data->dir.y_p, data->dir.y_n, HEIGHT);
 	if (k == 4)
-		data->z = 1.2;
+	{
+		data->dir.x_p = map_x + (data->dir.x_p - map_x) * 0.9;
+		data->dir.x_n = map_x + (data->dir.x_n - map_x) * 0.9;
+		data->dir.y_p = map_y + (data->dir.y_p - map_y) * 0.9;
+		data->dir.y_n = map_y + (data->dir.y_n - map_y) * 0.9;
+	}
 	else if (k == 5)
-		data->z = 0.8;
+	{
+		data->dir.x_p = map_x + (data->dir.x_p - map_x) * 1.1;
+		data->dir.x_n = map_x + (data->dir.x_n - map_x) * 1.1;
+		data->dir.y_p = map_y + (data->dir.y_p - map_y) * 1.1;
+		data->dir.y_n = map_y + (data->dir.y_n - map_y) * 1.1;
+	}
 	else
 		return (0);
-	data->dir.x_p = map_x + (data->dir.x_p - map_x) * data->z;
-	data->dir.x_n = map_x + (data->dir.x_n - map_x) * data->z;
-	data->dir.y_p = map_y + (data->dir.x_p - map_y) * data->z;
-	data->dir.y_n = map_y + (data->dir.x_n - map_y) * data->z;
 	my_draw(data);
 	return 0;
 }
