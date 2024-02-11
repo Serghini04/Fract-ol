@@ -6,7 +6,7 @@
 #    By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/03 11:20:23 by meserghi          #+#    #+#              #
-#    Updated: 2024/02/08 19:54:56 by meserghi         ###   ########.fr        #
+#    Updated: 2024/02/10 15:07:45 by meserghi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ FILES= fractol.c utils/ft_strcmp.c utils/to_double.c julia.c
 OBJ = ${FILES:.c=.o}
 
 FLAGS = -Wall -Wextra -Werror -O3
-F_MLX = -Lminilibx-linux -lmlx -L/usr/lib -lXext -lX11 -lm  -O3
+F_MLX = -Lminilibx-linux -lmlx -framework OpenGL -framework AppKit -O3
 NAME = fractol
 
 all : ${NAME}

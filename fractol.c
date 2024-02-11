@@ -6,7 +6,7 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 11:09:48 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/10 10:50:30 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/11 11:24:04 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	part_render(int x, int y, t_data *data)
 		}
 		i++;
 	}
-	my_pixel_put(&data->img, x, y,  BLACK);
+	my_pixel_put(&data->img, x, y,  DOMAIN);
 }
 
 void	my_draw(t_data *data)
@@ -129,13 +129,13 @@ int	keyb(int k, t_data *data)
 	if (k == 53)
 		exit(1);
 	else if (k == 124)
-		data->s.x += 0.5;
+		data->s.x += 0.05;
 	else if (k == 123)
-		data->s.x -= 0.5;
+		data->s.x -= 0.05;
 	else if (k == 125)
-		data->s.y -= 0.5;
+		data->s.y -= 0.05;
 	else if (k == 126)
-		data->s.y += 0.5;
+		data->s.y += 0.05;
 	else if (k == 78)
 		data->max_itra -= 10;
 	else if (k == 69)
@@ -149,23 +149,15 @@ int mouse(int k, int x, int y, t_data *data)
 	double map_x = to_onther_rang(x, data->dir.x_n, data->dir.x_p, WIDTH);
 	double map_y = to_onther_rang(y, data->dir.y_n, data->dir.y_p, HEIGHT);
 	if (k == 4)
-	{
-		data->z *= 1.05;
-		data->dir.x_p = map_x +(data->dir.x_p - map_x) * 1.05;
-		data->dir.x_n = map_x +(data->dir.x_n - map_x) * 1.05;
-		data->dir.y_p = map_y +(data->dir.x_p - map_y) * 1.05;
-		data->dir.y_n = map_y +(data->dir.x_n - map_y) * 1.05;
-	}
+		data->z = 1.2;
 	else if (k == 5)
-	{
-		data->z /= 1.5;
-		data->dir.x_p = map_x + (data->dir.x_p - map_x) / 1.5;
-		data->dir.x_n = map_x + (data->dir.x_n - map_x) / 1.5;
-		data->dir.y_p = map_y + (data->dir.x_p - map_y) / 1.5;
-		data->dir.y_n = map_y + (data->dir.x_n - map_y) / 1.5;
-	}
+		data->z = 0.8;
 	else
-		return 0;
+		return (0);
+	data->dir.x_p = map_x + (data->dir.x_p - map_x) * data->z;
+	data->dir.x_n = map_x + (data->dir.x_n - map_x) * data->z;
+	data->dir.y_p = map_y + (data->dir.x_p - map_y) * data->z;
+	data->dir.y_n = map_y + (data->dir.x_n - map_y) * data->z;
 	my_draw(data);
 	return 0;
 }
