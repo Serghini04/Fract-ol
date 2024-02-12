@@ -6,7 +6,7 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 11:09:48 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/12 10:08:37 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/12 10:34:23 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	my_draw(t_data *data)
 	}
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.p_img, 0, 0);
 }
+
 int	keyb(int k, t_data *data)
 {
 	if (k == 53)
@@ -53,10 +54,13 @@ int	keyb(int k, t_data *data)
 	return (0);
 }
 
-int mouse(int k, int x, int y, t_data *data)
+int	mouse(int k, int x, int y, t_data *data)
 {
-	double map_x = to_onther_rang(x, data->dir.x_n, data->dir.x_p, WIDTH);
-	double map_y = to_onther_rang(y, data->dir.y_p, data->dir.y_n, HEIGHT);
+	double	map_x;
+	double	map_y;
+
+	map_x = to_onther_rang(x, data->dir.x_n, data->dir.x_p, WIDTH);
+	map_y = to_onther_rang(y, data->dir.y_p, data->dir.y_n, HEIGHT);
 	if (k == 4)
 		data->z = 0.9;
 	else if (k == 5)
@@ -68,12 +72,12 @@ int mouse(int k, int x, int y, t_data *data)
 	data->dir.y_p = map_y + (data->dir.y_p - map_y) * data->z;
 	data->dir.y_n = map_y + (data->dir.y_n - map_y) * data->z;
 	my_draw(data);
-	return 0;
+	return (0);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_data *data;
+	t_data	*data;
 
 	if (ac == 2 && !ft_strcmp(av[1], "mandelbrot"))
 	{
