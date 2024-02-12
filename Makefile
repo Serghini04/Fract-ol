@@ -6,16 +6,18 @@
 #    By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/03 11:20:23 by meserghi          #+#    #+#              #
-#    Updated: 2024/02/10 15:07:45 by meserghi         ###   ########.fr        #
+#    Updated: 2024/02/12 10:19:51 by meserghi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FILES= fractol.c utils/ft_strcmp.c utils/to_double.c julia.c
+FILES= fractol.c my_mandelbrot my_julia.c utlis/fill_struct.c utils/ft_strcmp.c utils/math_part.c utils/to_double.c
 
 OBJ = ${FILES:.c=.o}
 
 FLAGS = -Wall -Wextra -Werror -O3
-F_MLX = -Lminilibx-linux -lmlx -framework OpenGL -framework AppKit -O3
+
+F_MLX = -lmlx -framework OpenGL -framework AppKit -O3
+
 NAME = fractol
 
 all : ${NAME}

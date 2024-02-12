@@ -6,12 +6,17 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:38:25 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/08 19:57:05 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/12 09:44:03 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
 
+void	error_input(void)
+{
+	perror("not a valid numerical representation!!");
+	exit(1);
+}
 
 void	check_point(char *str)
 {
@@ -20,6 +25,8 @@ void	check_point(char *str)
 
 	i = 0;
 	d = 0;
+	if (str[i] == '.')
+		error_input();
 	while (str[i])
 	{
 		if (str[i] == '.')
@@ -27,13 +34,10 @@ void	check_point(char *str)
 		i++;
 	}
 	if (d == 2)
-	{
-		perror("not a valid numerical representation!!");
-		exit(1);
-	}
+		error_input();
 }
 
-double _add(char *str, double res)
+double	_add(char *str, double res)
 {
 	int		i;
 	double	a;
@@ -46,6 +50,8 @@ double _add(char *str, double res)
 		a *= 0.1;
 		i++;
 	}
+	if (str[i - 1] == '.')
+		error_input();
 	return (res);
 }
 

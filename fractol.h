@@ -6,7 +6,7 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 11:10:17 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/11 22:16:46 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/12 10:17:26 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FRACTOL
 # include <stdio.h>
 # include <unistd.h>
-# include <fcntl.h>
 # include <math.h>
 # include <mlx.h>
 # include <stdlib.h>
@@ -32,8 +31,6 @@
 #define MAGENTA 0xFF00FF
 #define ORANGE 0xFFA500
 #define PURPLE 0x800080
-
-
 
 typedef struct s_nb_cmp
 {
@@ -71,23 +68,26 @@ typedef struct s_data
 	t_img		img;		//malx_new_image()
 	t_shift		s;
 	t_direction	dir;
-	int			p;
+	int			axis;
 	double		z;
 	int			v;
 	char		**av;
 	int			max_itra;
 }	t_data;
 
-int			ft_strcmp(char *s1,char *s2);
-
+/// Utils ...
+int			ft_strcmp(char *s1, char *s2);
 double		to_onther_rang(double x, double n_rang0, double n_rang1, double o_rang);
 void		my_pixel_put(t_img *img, int x, int y, int color);
-t_data		*start(char *name, char **av);
 t_nb_cmp	squar_cmp(t_nb_cmp nb);
 t_nb_cmp 	small_equa(t_nb_cmp z, t_nb_cmp c);
-void		part_render(int x, int y, t_data *data);
-void		my_draw(t_data *data);
 double		to_double(char *str);
+t_data		*start(char *name, char **av);
+void 		fill(t_data *data, char **av);
+void		my_draw(t_data *data);
+int			keyb(int k, t_data *data);
+int			mouse(int k, int x, int y, t_data *data);
 void		my_julai(int x, int y, t_data *data);
+void		my_mandelbrot(int x, int y, t_data *data);
 
 #endif

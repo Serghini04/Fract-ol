@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   my_julia.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 19:34:42 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/11 22:44:39 by meserghi         ###   ########.fr       */
+/*   Created: 2024/02/12 10:09:09 by meserghi          #+#    #+#             */
+/*   Updated: 2024/02/12 10:09:12 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	my_julai(int x, int y, t_data *data)
 	while (i < data->max_itra)
 	{
 		z = small_equa(z, c);
-		if ((pow(z.r, 2) + pow(z.i, 2)) > data->p)
+		if ((pow(z.r, 2) + pow(z.i, 2)) > data->axis)
 		{
 			color = to_onther_rang(i, BLACK, RED, data->max_itra);
 			my_pixel_put(&data->img, x, y, color);
