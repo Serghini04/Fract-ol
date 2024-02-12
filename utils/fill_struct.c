@@ -6,11 +6,11 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:14:22 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/12 10:14:24 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/12 10:21:48 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../fractol.h"
 
 void fill(t_data *data, char **av)
 {
