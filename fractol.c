@@ -6,7 +6,7 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 11:09:48 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/13 11:49:02 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:50:50 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,13 @@ void	my_draw(t_data *data)
 int	keyb(int k, t_data *data)
 {
 	if (k == 53)
-		exit(1);
+	{
+		mlx_destroy_image(data->mlx, data->img.p_img);
+		mlx_destroy_window(data->mlx, data->mlx_win);
+		free(data->mlx);
+		free(data);
+		exit(0);
+	}
 	else if (k == 124)
 		data->s.x += 0.05;
 	else if (k == 123)
@@ -50,6 +56,8 @@ int	keyb(int k, t_data *data)
 		data->max_itra -= 10;
 	else if (k == 69)
 		data->max_itra += 10;
+	else
+		return (0);
 	my_draw(data);
 	return (0);
 }
@@ -81,12 +89,12 @@ int	main(int ac, char **av)
 
 	if (ac == 2 && !ft_strcmp(av[1], "mandelbrot"))
 	{
-		data = start("mandelbrot", av);
+		data = start("mandelbrot", av, ac);
 		data->v = 1;
 	}
 	else if (ac == 4 && !ft_strcmp(av[1], "julia"))
 	{
-		data = start("julia", av);
+		data = start("julia", av, ac);
 		data->v = 2;
 	}
 	else

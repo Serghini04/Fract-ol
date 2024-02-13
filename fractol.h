@@ -6,7 +6,7 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 11:10:17 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/12 10:38:13 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:55:58 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_data
 	t_img		img;		//malx_new_image()
 	t_shift		s;
 	t_direction	dir;
+	t_nb_cmp	input;
 	int			axis;
 	double		z;
 	int			v;
@@ -82,8 +83,8 @@ double		to_onther_rang(double x, double n_rang0, double n_rang1, \
 void		my_pixel_put(t_img *img, int x, int y, int color);
 t_nb_cmp	squar_cmp(t_nb_cmp nb);
 t_nb_cmp	small_equa(t_nb_cmp z, t_nb_cmp c);
-double		to_double(char *str);
-t_data		*start(char *name, char **av);
+double		to_double(char *str, t_data *data);
+t_data		*start(char *name, char **av, int ac);
 void		fill(t_data *data, char **av);
 void		my_draw(t_data *data);
 int			keyb(int k, t_data *data);

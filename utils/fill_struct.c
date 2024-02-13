@@ -6,7 +6,7 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:14:22 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/13 11:44:25 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:56:18 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,18 @@ void	fill(t_data *data, char **av)
 	data->av = av;
 }
 
-t_data	*start(char *name, char **av)
+t_data	*start(char *name, char **av, int ac)
 {
 	t_data	*data;
 
 	data = malloc(sizeof(t_data));
 	if (!data)
 		(perror("malloc: "), exit(1));
+	if (ac == 4)
+	{
+		data->input.r = to_double(av[2], data);
+		data->input.i = to_double(av[3], data);
+	}
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		(perror("mlx: "), free(data), exit(1));
@@ -46,7 +51,7 @@ t_data	*start(char *name, char **av)
 						&data->img.bit_pixel, \
 						&data->img.len, &data->img.endian);
 	if (!data->img.p_pixel)
-		(perror("mlx "), mlx_destroy_image(data->mlx, data->mlx_win), mlx_destroy_window(data->mlx, data->mlx_win), free(data->mlx), free(data), exit(1));
+		(perror("mlx "), mlx_destroy_image(data->mlx, data->img.p_img), mlx_destroy_window(data->mlx, data->mlx_win), free(data->mlx), free(data), exit(1));
 	fill(data, av);
 	return (data);
 }

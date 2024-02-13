@@ -6,19 +6,20 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:38:25 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/12 09:44:03 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:55:39 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fractol.h"
 
-void	error_input(void)
+void	error_input(t_data *data)
 {
 	perror("not a valid numerical representation!!");
+	free(data);
 	exit(1);
 }
 
-void	check_point(char *str)
+void	check_point(char *str, t_data *data)
 {
 	int	i;
 	int	d;
@@ -26,18 +27,18 @@ void	check_point(char *str)
 	i = 0;
 	d = 0;
 	if (str[i] == '.')
-		error_input();
+		error_input(data);
 	while (str[i])
 	{
 		if (str[i] == '.')
 			d++;
 		i++;
 	}
-	if (d == 2)
-		error_input();
+	if (d >= 2)
+		error_input(data);
 }
 
-double	_add(char *str, double res)
+double	_add(char *str, double res, t_data *data)
 {
 	int		i;
 	double	a;
@@ -50,12 +51,12 @@ double	_add(char *str, double res)
 		a *= 0.1;
 		i++;
 	}
-	if (str[i - 1] == '.')
-		error_input();
+	if (str[i] != '\0')
+		error_input(data);
 	return (res);
 }
 
-double	to_double(char *str)
+double	to_double(char *str, t_data *data)
 {
 	int		i;
 	double	res;
@@ -64,7 +65,7 @@ double	to_double(char *str)
 	i = 0;
 	res = 0;
 	s = 1;
-	check_point(str);
+	check_point(str, data);
 	if (str[i] == '+' || str[i] == '-')
 	{
 		if (str[i] == '-')
@@ -76,8 +77,10 @@ double	to_double(char *str)
 		res = res * 10 + str[i] - 48;
 		i++;
 	}
-	if (!str[i] || str[i] != '.')
+	if (str[i] == '\0')
 		return (s * res);
-	res = _add(&str[i + 1], res);
+	else if (str[i] != '.')
+		error_input(data);
+	res = _add(&str[i + 1], res, data);
 	return (s * res);
 }
