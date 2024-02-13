@@ -6,7 +6,7 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:14:22 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/13 11:29:20 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/13 11:44:25 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ t_data	*start(char *name, char **av)
 		(perror("mlx: "), free(data), exit(1));
 	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, name);
 	if (!data->mlx_win)
-		(perror("mlx: "), free(data), exit(1));
+		(perror("mlx: "), free(data->mlx), free(data), exit(1));
 	data->img.p_img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	if (!data->img.p_img)
-		(perror("mlx: "), free(data), exit(1));
+		(perror("mlx: "), mlx_destroy_window(data->mlx, data->mlx_win), free(data->mlx), free(data), exit(1));
 	data->img.p_pixel = mlx_get_data_addr(data->img.p_img, \
 						&data->img.bit_pixel, \
 						&data->img.len, &data->img.endian);
 	if (!data->img.p_pixel)
-		(perror("mlx "), free(data), exit(1));
+		(perror("mlx "), mlx_destroy_image(data->mlx, data->mlx_win), mlx_destroy_window(data->mlx, data->mlx_win), free(data->mlx), free(data), exit(1));
 	fill(data, av);
 	return (data);
 }
