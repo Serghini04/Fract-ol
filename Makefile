@@ -16,7 +16,7 @@ OBJ = ${FILES:.c=.o}
 
 FLAGS = -Wall -Wextra -Werror -O3
 
-F_MLX = -lmlx -framework OpenGL -framework AppKit -O3
+F_MLX = -Lminilibx-linux -lmlx -L/usr/lib -lXext -lX11 -lm  -O3
 
 NAME = fractol
 

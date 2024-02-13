@@ -35,5 +35,5 @@ void	my_mandelbrot(int x, int y, t_data *data)
 		}
 		i++;
 	}
-	my_pixel_put(&data->img, x, y, DOMAIN);
+	my_pixel_put(&data->img, x, y, MAGENTA);
 }
