@@ -6,7 +6,7 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:09:09 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/13 13:50:30 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:51:24 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void	my_julai(int x, int y, t_data *data)
 	c.r = data->input.r;
 	c.i = data->input.i;
 	i = 0;
-	z.r = to_onther_rang(x, data->dir.x_n, data->dir.x_p, WIDTH) + data->s.x;
-	z.i = to_onther_rang(y, data->dir.y_p, data->dir.y_n, HEIGHT) + data->s.y;
+	z.r = to_another_rang(x, data->dir.x_n, data->dir.x_p, WIDTH) + data->s.x;
+	z.i = to_another_rang(y, data->dir.y_p, data->dir.y_n, HEIGHT) + data->s.y;
 	while (i < data->max_itra)
 	{
 		z = small_equa(z, c);
 		if ((pow(z.r, 2) + pow(z.i, 2)) > data->axis)
 		{
-			color = to_onther_rang(i, BLACK, RED, data->max_itra);
+			color = to_another_rang(i, BLACK, RED, data->max_itra);
 			my_pixel_put(&data->img, x, y, color);
 			return ;
 		}

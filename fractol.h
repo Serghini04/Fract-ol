@@ -6,7 +6,7 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 11:10:17 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/13 13:55:58 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:08:14 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_data
 
 /// Utils ...
 int			ft_strcmp(char *s1, char *s2);
-double		to_onther_rang(double x, double n_rang0, double n_rang1, \
+double		to_another_rang(double x, double n_rang0, double n_rang1, \
 			double o_rang);
 void		my_pixel_put(t_img *img, int x, int y, int color);
 t_nb_cmp	squar_cmp(t_nb_cmp nb);
@@ -91,5 +91,7 @@ int			keyb(int k, t_data *data);
 int			mouse(int k, int x, int y, t_data *data);
 void		my_julai(int x, int y, t_data *data);
 void		my_mandelbrot(int x, int y, t_data *data);
+void		my_burning_ship(int x, int y, t_data *data);
+t_data		*check_fractol(int ac, char **av);
 
 #endif

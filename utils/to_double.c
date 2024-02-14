@@ -6,7 +6,7 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:38:25 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/13 13:55:39 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:42:52 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error_input(t_data *data)
 {
-	perror("not a valid numerical representation!!");
+	perror("julia: not a valid numerical representation!");
 	free(data);
 	exit(1);
 }

@@ -6,7 +6,7 @@
 #    By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/03 11:20:23 by meserghi          #+#    #+#              #
-#    Updated: 2024/02/13 11:46:22 by meserghi         ###   ########.fr        #
+#    Updated: 2024/02/14 09:58:13 by meserghi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ FILES= fractol.c  my_mandelbrot.c my_julia.c utils/fill_struct.c utils/ft_strcmp
 
 OBJ = ${FILES:.c=.o}
 
-FLAGS = -Wall -Wextra -Werror -O3
+FLAGS = -Wall -Wextra -Werror
 
 F_MLX = -lmlx -framework OpenGL -framework AppKit -O3
 

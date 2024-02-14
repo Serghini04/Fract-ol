@@ -6,7 +6,7 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 11:09:48 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/13 13:50:50 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:07:40 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void	my_draw(t_data *data)
 		{
 			if (data->v == 1)
 				my_mandelbrot(i, j, data);
-			else
+			else if (data->v == 2)
+				my_burning_ship(i, j, data);
+			else if (data->v == 3)
 				my_julai(i, j, data);
 			j++;
 		}
@@ -40,7 +42,6 @@ int	keyb(int k, t_data *data)
 	{
 		mlx_destroy_image(data->mlx, data->img.p_img);
 		mlx_destroy_window(data->mlx, data->mlx_win);
-		free(data->mlx);
 		free(data);
 		exit(0);
 	}
@@ -67,8 +68,8 @@ int	mouse(int k, int x, int y, t_data *data)
 	double	map_x;
 	double	map_y;
 
-	map_x = to_onther_rang(x, data->dir.x_n, data->dir.x_p, WIDTH);
-	map_y = to_onther_rang(y, data->dir.y_p, data->dir.y_n, HEIGHT);
+	map_x = to_another_rang(x, data->dir.x_n, data->dir.x_p, WIDTH);
+	map_y = to_another_rang(y, data->dir.y_p, data->dir.y_n, HEIGHT);
 	if (k == 4)
 		data->z = 0.9;
 	else if (k == 5)
@@ -83,25 +84,24 @@ int	mouse(int k, int x, int y, t_data *data)
 	return (0);
 }
 
+int	on_destroy(t_data *data)
+{
+	mlx_destroy_image(data->mlx, data->img.p_img);
+	mlx_destroy_window(data->mlx, data->mlx_win);
+	free(data->mlx);
+	free(data);
+	exit(0);
+}
+
 int	main(int ac, char **av)
 {
 	t_data	*data;
 
-	if (ac == 2 && !ft_strcmp(av[1], "mandelbrot"))
-	{
-		data = start("mandelbrot", av, ac);
-		data->v = 1;
-	}
-	else if (ac == 4 && !ft_strcmp(av[1], "julia"))
-	{
-		data = start("julia", av, ac);
-		data->v = 2;
-	}
-	else
-		exit(1);
+	data = check_fractol(ac, av);
 	my_draw(data);
 	mlx_key_hook(data->mlx_win, keyb, data);
 	mlx_mouse_hook(data->mlx_win, mouse, data);
+	mlx_hook(data->mlx_win, 17, 0, on_destroy, data);
 	mlx_loop(data->mlx);
 	return (0);
 }
