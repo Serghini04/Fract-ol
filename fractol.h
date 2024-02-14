@@ -6,7 +6,7 @@
 /*   By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 11:10:17 by meserghi          #+#    #+#             */
-/*   Updated: 2024/02/14 10:08:14 by meserghi         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:14:05 by meserghi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,6 @@
 # define BLACK 0x000000
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000
-# define GREEN 0x00FF00
-# define BLUE 0x0000FF
-# define YELLOW 0xFFFF00
-# define CYAN 0x00FFFF
-# define MAGENTA 0xFF00FF
-# define ORANGE 0xFFA500
 # define PURPLE 0x800080
 
 typedef struct s_nb_cmp
