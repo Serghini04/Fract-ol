@@ -6,7 +6,7 @@
 #    By: meserghi <meserghi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/03 11:20:23 by meserghi          #+#    #+#              #
-#    Updated: 2024/02/14 09:58:13 by meserghi         ###   ########.fr        #
+#    Updated: 2024/02/14 10:23:42 by meserghi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ ${NAME} : ${OBJ}
 	cc ${FLAGS} ${OBJ} ${F_MLX} -o ${NAME}
 
 %.o : %.c fractol.h
-	cc ${FLAGS} -c $< -o $@
+	cc ${FLAGS} -O3 -c $< -o $@
 
 clean :
 	rm -f ${OBJ}
